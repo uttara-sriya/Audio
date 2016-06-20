@@ -1,0 +1,72 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Book Review App</title>
+    <link th:if="${mode=='development'}" rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}" media="screen"/>
+    <link th:if="${mode=='production'}" rel="stylesheet" href="../static/bootstrap.min.css" th:href="@{/bootstrap.min.css}" media="screen"/>
+    <script type="text/javascript" src="/static/js/angular.min.js" th:src="@{/js/angular.min.js}"></script>
+    <script type="text/javascript" src="/static/app/app.module.js" th:src="@{/app/app.module.js}"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
+    <script type="text/javascript" src="/static/app/recordings.controller.js" th:src="@{/app/recordings.controller.js}"></script>
+</head>
+<body ng-app="app" ng-controller="RecordingsController as vm">
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand">Booking Review</a>
+            </div>
+            <p class="navbar-text navbar-right" th:text="'Signed in as' + ${username}"  style="margin-right: 10px;">Signed in as anonymous</p>
+        </div>
+    </nav>
+</header>
+<div>
+    <div class="row">
+        <div class="col-lg-offset-2 col-lg-8" style="padding-left: 35px;">
+            <div class="btn-group" role="group">
+                <button ng-click="vm.getAll()" type="button" class="btn btn-primary">All</button>
+                <button ng-click="vm.getStars()" type="button" class="btn btn-primary">Stars</button>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ReviewId</th>
+                    <th>Name</th>
+                    <th>Stars</th>
+                    <th>Review</th>
+                </tr>
+                </thead>
+                <tbody>
+                 <tr ng-repeat="recording in vm.recordings">
+                     <td>{{recording.id}}</td>
+                     <td>{{recording.name}}</td>
+                     <td>{{recording.stars}}</td>
+                     <td>{{recording.review}}</td>
+                     <td>
+                         <button class="btn btn-danger" ng-click="vm.deleteRecording(recording.id)">Delete</button>
+                     </td>
+                 </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer class="footer" style="position:absolute; bottom: 0;background-color: #f5f5f5;">
+    <div class="container">
+        <p th:text="${#dates.format(datetime,'dd mm yyyy HH:mm')}" class="text-muted">Page rendered today</p>
+    </div>
+</footer>
+</body>
+<!--<body ng-app="exampleModule">-->
+<!--<input ng-model="dynamicName" type="text" placeholder="write your name here"> </input>-->
+<!--<p>Hello {{dynamicName}} !</p>-->
+
+<!--<script>-->
+    <!--angular.module('exampleModule', []);-->
+<!--</script>-->
+<!--</body>-->
+
+</html>
+
+
+
